@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"simpletodolist/internal/event"
 	"slices"
+	"strings"
 	"time"
 
 	"github.com/k0kubun/pp"
@@ -49,7 +50,9 @@ func Add(c []string, t string) {
 		event.NewEvent(t, "Некорректный ввод", time.Now().Format("2006-01-02 15:04:05"))
 
 	default:
-		allTask = append(allTask, &Task{c[1], t, time.Now().Format("2006-01-02 15:04:05"), false, ""})
+		txt := strings.Join(c[2:], " ")
+
+		allTask = append(allTask, &Task{c[1], txt, time.Now().Format("2006-01-02 15:04:05"), false, ""})
 
 		pp.Println("Вы добавили задачу:", allTask)
 
@@ -95,8 +98,7 @@ func Del(c []string, t string) {
 					fmt.Println("")
 					fmt.Println("Задача", v.title, " удалена")
 					fmt.Println("")
-					poiter := &allTask
-					*poiter = slices.Delete(allTask, k, k+1)
+					allTask = slices.Delete(allTask, k, k+1)
 					event.NewEvent(t, "", time.Now().Format("2006-01-02 15:04:05"))
 					return
 				}
