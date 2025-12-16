@@ -4,8 +4,10 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"simpletodolist/internal/event"
 	"simpletodolist/internal/todo"
 	"strings"
+	"time"
 )
 
 func main() {
@@ -19,38 +21,45 @@ func main() {
 			return
 		}
 
-		command := strings.Fields(scan.Text())
+		text := scan.Text()
+
+		command := strings.Fields(text)
 
 		if len(command) == 0 {
 			fmt.Println("")
 			fmt.Println("Вы ничего не ввели")
 			fmt.Println("")
+			event.NewEvent(text, "Вы ничего не ввели", time.Now().Format("2006-01-02 15:04:05"))
 
 		} else {
 			switch command[0] {
 			case "help":
-				todo.Help()
+				todo.Help(text)
 
 			case "exit":
 				todo.ExitDo()
 				return
 
+			case "events":
+				event.ShowEvent()
+
 			case "add":
-				todo.Add(command)
+				todo.Add(command, text)
 
 			case "list":
-				todo.List()
+				todo.List(text)
 
 			case "del":
-				todo.Del(command)
+				todo.Del(command, text)
 
 			case "done":
-				todo.Done(command)
+				todo.Done(command, text)
 
 			default:
 				fmt.Println("")
 				fmt.Println("Некорректный ввод")
 				fmt.Println("")
+				event.NewEvent(text, "Некорректный ввод", time.Now().Format("2006-01-02 15:04:05"))
 			}
 		}
 	}
