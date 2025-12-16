@@ -48,10 +48,8 @@ func Add(c []string) {
 		for i := 2; i < len(c); i++ {
 			txt += c[i]
 		}
-		now := time.Now()
-		formatted := now.Format("2006-01-02 15:04:05")
 
-		allTask = append(allTask, &Task{c[1], txt, formatted, false, ""})
+		allTask = append(allTask, &Task{c[1], txt, time.Now().Format("2006-01-02 15:04:05"), false, ""})
 
 		pp.Println("Вы добавили задачу:", allTask)
 	}
@@ -98,5 +96,36 @@ func Del(c []string) {
 			fmt.Println("")
 		}
 	}
+}
 
+func Done(c []string) {
+	if len(c) > 2 || len(c) == 1 {
+		fmt.Println("")
+		fmt.Println("Некорректный ввод")
+		fmt.Println("")
+	} else {
+		switch c[1] {
+		case "":
+			fmt.Println("")
+			fmt.Println("Некорректный ввод")
+			fmt.Println("")
+
+		default:
+			for _, v := range allTask {
+				if c[1] == v.title {
+					fmt.Println("")
+					fmt.Println("Задача", v.title, " отмечена как выполненная")
+					fmt.Println("")
+					v.done = true
+					v.timedone = time.Now().Format("2006-01-02 15:04:05")
+
+					return
+				}
+			}
+
+			fmt.Println("")
+			fmt.Println("Не найдено такой задачи")
+			fmt.Println("")
+		}
+	}
 }

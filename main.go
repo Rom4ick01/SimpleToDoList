@@ -44,6 +44,9 @@ func main() {
 			case "del":
 				todo.Del(command)
 
+			case "done":
+				todo.Done(command)
+
 			default:
 				fmt.Println("")
 				fmt.Println("Некорректный ввод")
