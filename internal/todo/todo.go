@@ -2,20 +2,21 @@ package todo
 
 import (
 	"fmt"
+	"slices"
 	"time"
 
 	"github.com/k0kubun/pp"
 )
 
 type Task struct {
-	Title      string
+	title      string
 	text       string
 	createtime string
 	done       bool
 	timedone   string
 }
 
-var allTask []Task
+var allTask []*Task
 
 func Help() {
 	fmt.Println("")
@@ -50,8 +51,52 @@ func Add(c []string) {
 		now := time.Now()
 		formatted := now.Format("2006-01-02 15:04:05")
 
-		allTask = append(allTask, Task{c[1], txt, formatted, false, ""})
+		allTask = append(allTask, &Task{c[1], txt, formatted, false, ""})
 
 		pp.Println("Вы добавили задачу:", allTask)
 	}
+}
+
+func List() {
+	if len(allTask) == 0 {
+		fmt.Println("")
+		fmt.Println("У вас нет задач")
+		fmt.Println("")
+	} else {
+		fmt.Println("")
+		pp.Println(allTask)
+		fmt.Println("")
+	}
+}
+
+func Del(c []string) {
+	if len(c) > 2 || len(c) == 1 {
+		fmt.Println("")
+		fmt.Println("Некорректный ввод")
+		fmt.Println("")
+	} else {
+		switch c[1] {
+		case "":
+			fmt.Println("")
+			fmt.Println("Некорректный ввод")
+			fmt.Println("")
+
+		default:
+			for k, v := range allTask {
+				if c[1] == v.title {
+					fmt.Println("")
+					fmt.Println("Задача", v.title, " удалена")
+					fmt.Println("")
+					poiter := &allTask
+					*poiter = slices.Delete(allTask, k, k+1)
+					return
+				}
+			}
+
+			fmt.Println("")
+			fmt.Println("Не найдено такой задачи")
+			fmt.Println("")
+		}
+	}
+
 }

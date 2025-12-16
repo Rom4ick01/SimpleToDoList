@@ -38,6 +38,12 @@ func main() {
 			case "add":
 				todo.Add(command)
 
+			case "list":
+				todo.List()
+
+			case "del":
+				todo.Del(command)
+
 			default:
 				fmt.Println("")
 				fmt.Println("Некорректный ввод")
