@@ -1,8 +1,6 @@
 package event
 
 import (
-	"fmt"
-
 	"github.com/k0kubun/pp"
 )
 
@@ -19,7 +17,5 @@ func NewEvent(t, e, tme string) {
 }
 
 func ShowEvent() {
-	fmt.Println("")
 	pp.Println(event)
-	fmt.Println("")
 }

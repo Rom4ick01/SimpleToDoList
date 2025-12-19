@@ -26,9 +26,7 @@ func main() {
 		command := strings.Fields(text)
 
 		if len(command) == 0 {
-			fmt.Println("")
-			fmt.Println("Вы ничего не ввели")
-			fmt.Println("")
+			fmt.Println("\nВы ничего не ввели\n")
 			event.NewEvent(text, "Вы ничего не ввели", time.Now().Format("2006-01-02 15:04:05"))
 
 		} else {
@@ -56,9 +54,7 @@ func main() {
 				todo.Done(command, text)
 
 			default:
-				fmt.Println("")
-				fmt.Println("Некорректный ввод")
-				fmt.Println("")
+				fmt.Println("\nНекорректный ввод\n")
 				event.NewEvent(text, "Некорректный ввод", time.Now().Format("2006-01-02 15:04:05"))
 			}
 		}

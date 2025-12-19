@@ -21,31 +21,26 @@ type Task struct {
 var allTask []*Task
 
 func Help(t string) {
-	fmt.Println("")
-	fmt.Println("Список команд:")
+	fmt.Println("\nСписок команд:")
 	fmt.Println("help — эта команда позволяет узнать доступные команды и их формат")
 	fmt.Println("add {заголовок задачи из одного слова} {текст задачи} — эта команда позволяет добавлять новые задачи в список задач")
 	fmt.Println("list — эта команда позволяет получить полный список всех задач")
 	fmt.Println("del {заголовок существующей задачи} — эта команда позволяет удалить задачу по её заголовку")
 	fmt.Println("done {заголовок существующей задачи} — эта команда позволяет отменить задачу как выполненную")
 	fmt.Println("events — эта команда позволяет получить список всех событий")
-	fmt.Println("exit — эта команда позволяет завершить выполнение программы")
-	fmt.Println("")
+	fmt.Println("exit — эта команда позволяет завершить выполнение программы\n")
 
 	event.NewEvent(t, "", time.Now().Format("2006-01-02 15:04:05"))
 }
 
 func ExitDo() {
-	fmt.Println("")
-	fmt.Println("Вы завершили работу программы, всего доброго!")
+	fmt.Println("\nВы завершили работу программы, всего доброго!")
 }
 
 func Add(c []string, t string) {
 	switch len(c) {
 	case 1, 2:
-		fmt.Println("")
-		fmt.Println("Некорректный ввод")
-		fmt.Println("")
+		fmt.Println("\nНекорректный ввод\n")
 
 		event.NewEvent(t, "Некорректный ввод", time.Now().Format("2006-01-02 15:04:05"))
 
@@ -62,9 +57,7 @@ func Add(c []string, t string) {
 
 func List(t string) {
 	if len(allTask) == 0 {
-		fmt.Println("")
-		fmt.Println("У вас нет задач")
-		fmt.Println("")
+		fmt.Println("\nУ вас нет задач\n")
 
 		event.NewEvent(t, "У вас нет задач", time.Now().Format("2006-01-02 15:04:05"))
 	} else {
@@ -78,17 +71,13 @@ func List(t string) {
 
 func Del(c []string, t string) {
 	if len(c) > 2 || len(c) == 1 {
-		fmt.Println("")
-		fmt.Println("Некорректный ввод")
-		fmt.Println("")
+		fmt.Println("\nНекорректный ввод\n")
 
 		event.NewEvent(t, "Некорректный ввод", time.Now().Format("2006-01-02 15:04:05"))
 	} else {
 		switch c[1] {
 		case "":
-			fmt.Println("")
-			fmt.Println("Некорректный ввод")
-			fmt.Println("")
+			fmt.Println("\nНекорректный ввод\n")
 
 			event.NewEvent(t, "Некорректный ввод", time.Now().Format("2006-01-02 15:04:05"))
 
@@ -104,9 +93,7 @@ func Del(c []string, t string) {
 				}
 			}
 
-			fmt.Println("")
-			fmt.Println("Не найдено такой задачи")
-			fmt.Println("")
+			fmt.Println("\nНе найдено такой задачи\n")
 
 			event.NewEvent(t, "Не найдено такой задачи", time.Now().Format("2006-01-02 15:04:05"))
 		}
@@ -115,17 +102,13 @@ func Del(c []string, t string) {
 
 func Done(c []string, t string) {
 	if len(c) > 2 || len(c) == 1 {
-		fmt.Println("")
-		fmt.Println("Некорректный ввод")
-		fmt.Println("")
+		fmt.Println("\nНекорректный ввод\n")
 
 		event.NewEvent(t, "Некорректный ввод", time.Now().Format("2006-01-02 15:04:05"))
 	} else {
 		switch c[1] {
 		case "":
-			fmt.Println("")
-			fmt.Println("Некорректный ввод")
-			fmt.Println("")
+			fmt.Println("\nНекорректный ввод\n")
 
 			event.NewEvent(t, "Некорректный ввод", time.Now().Format("2006-01-02 15:04:05"))
 
@@ -143,9 +126,7 @@ func Done(c []string, t string) {
 				}
 			}
 
-			fmt.Println("")
-			fmt.Println("Не найдено такой задачи")
-			fmt.Println("")
+			fmt.Println("\nНе найдено такой задачи\n")
 
 			event.NewEvent(t, "Не найдено такой задачи", time.Now().Format("2006-01-02 15:04:05"))
 		}
